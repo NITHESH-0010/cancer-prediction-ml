@@ -1,4 +1,4 @@
-# ============================================================
+ # ============================================================
 # ONCOVISION ML — PROFESSIONAL FLASK BACKEND
 # ============================================================
 
@@ -17,13 +17,41 @@ app = Flask(__name__)
 # LOAD TRAINED MODEL & SCALER
 # ============================================================
 
+# ============================================================
+# LOAD TRAINED MODEL & SCALER
+# ============================================================
+
+import os
+import joblib
+
 try:
-    model = joblib.load("../models/best_cancer_model.pkl")
-    scaler = joblib.load("../models/scaler.pkl")
+
+    # BASE DIRECTORY OF app.py
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+    # MODEL PATHS
+    model_path = os.path.join(
+        BASE_DIR,
+        "..",
+        "models",
+        "best_cancer_model.pkl"
+    )
+
+    scaler_path = os.path.join(
+        BASE_DIR,
+        "..",
+        "models",
+        "scaler.pkl"
+    )
+
+    # LOAD FILES
+    model = joblib.load(model_path)
+    scaler = joblib.load(scaler_path)
 
     print("✅ Model and Scaler Loaded Successfully")
 
 except Exception as e:
+
     print("❌ Error Loading Model Files")
     print(e)
 
