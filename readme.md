@@ -1,6 +1,11 @@
-# 🧬 Cancer Prediction ML Web Application
+# 🧬 Cancer Prediction ML Web Application                                            
 
 A Machine Learning web application developed to predict cancer risk using healthcare and lifestyle parameters. The project combines data science, machine learning, and web development into a complete end-to-end predictive healthcare system. 
+
+# 🌐 Live Website
+
+https://cancer-prediction-ml.up.railway.app
+
 
 ---
 
@@ -40,7 +45,7 @@ The system analyzes patient health parameters and predicts possible cancer risk 
 
 The project follows a complete professional ML pipeline:
 
-```text
+
 Raw Dataset
    ↓
 Data Cleaning
@@ -58,14 +63,14 @@ Model Evaluation
 Model Saving
    ↓
 Flask Deployment
-```
+
 
 
 
 
 # 📂 Project Structure
 
-```text
+
 Cancer-Prediction-ML/
 │
 ├── app/
@@ -100,7 +105,7 @@ Cancer-Prediction-ML/
 ├── README.md
 │
 └── train_model.py
-```
+
 
 ---
 
@@ -201,7 +206,7 @@ The frontend was developed using:
 
 The model training pipeline includes:
 
-```python
+
 Data Cleaning
 → Feature Engineering
 → Train-Test Split
@@ -210,7 +215,7 @@ Data Cleaning
 → Hyperparameter Tuning
 → Evaluation
 → Model Saving
-```
+
 
 ---
 
@@ -238,42 +243,40 @@ The model was evaluated using:
 
 ## 1️⃣ Clone Repository
 
-```bash
+
 git clone https://github.com/NITHESH-0010/Cancer-Prediction-ML.git
-```
+
 
 ---
 
 ## 2️⃣ Open Project
 
-```bash
+
 cd Cancer-Prediction-ML
-```
+
 
 ---
 
 ## 3️⃣ Install Dependencies
 
-```bash
+
 pip install -r requirements.txt
-```
+
 
 ---
 
 ## 4️⃣ Run Flask Application
 
-```bash
+
 cd app
 python app.py
-```
+
 
 ---
 
 ## 5️⃣ Open Browser
 
-```text
-http://127.0.0.1:5000
-```
+https://cancer-prediction-ml.up.railway.app
 
 ---
 
