@@ -284,25 +284,24 @@ https://cancer-prediction-ml.up.railway.app
 
 ## Homepage
 
-![Homepage](screenshots/homepage.png)
+screenshots/homepage.png.png
 
 ---
 
 ## Prediction Interface
 
-![Prediction](screenshots/prediction-result.png)
-
+screenshots/correlation-heatmap.png.png
 ---
 
 ## correlation heatmap
 
-![Heatmap](screenshots/correlation-heatmap.png)
+![Correlation heatmap](screenshots/correlation-heatmap.png.png)
 
 ---
 
 ## 📉 Confusion Matrix
 
-![Confusion Matrix](screenshots/confusion-matrix)
+![Confusion Matrix](screenshots/confusion-matrix/confusionmatrix-randomforest.png)
 
 ---
 
