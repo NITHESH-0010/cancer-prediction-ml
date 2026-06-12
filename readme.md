@@ -284,13 +284,13 @@ https://cancer-prediction-ml.up.railway.app
 
 ## Homepage
 
-screenshots/homepage.png.png
+![homepage](screenshots/homepage.png.png)
 
 ---
 
 ## Prediction Interface
 
-screenshots/correlation-heatmap.png.png
+![prediction interface](screenshots/prediction-result.png.png)
 ---
 
 ## correlation heatmap
