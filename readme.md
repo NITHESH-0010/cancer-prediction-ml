@@ -1,17 +1,17 @@
-# 🧬 Cancer Prediction ML Web Application                                            
+# 🧬Healthcare Cancer Risk Platform                                           
 
 A Machine Learning web application developed to predict cancer risk using healthcare and lifestyle parameters. The project combines data science, machine learning, and web development into a complete end-to-end predictive healthcare system. 
 
 # 🌐 Live Website
 
-https://cancer-prediction-ml.up.railway.app
+https://healthcare-cancer-risk-platform.onrender.com
 
 
 ---
 
 # 🌐 Project Overview
 
-OncoVision ML is a professional cancer risk prediction system developed using:
+ Healthcare Cancer Risk Platform is a cancer risk prediction system developed using:
 
 - Python
 - Machine Learning
@@ -276,7 +276,7 @@ python app.py
 
 ## 5️⃣ Open Browser
 
-https://cancer-prediction-ml.up.railway.app
+https://healthcare-cancer-risk-platform.onrender.com
 
 ---
 
