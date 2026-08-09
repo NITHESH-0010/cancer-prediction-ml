@@ -1,5 +1,5 @@
  # ============================================================
-# ONCOVISION ML — PROFESSIONAL FLASK BACKEND
+# CANCER RISK PREDICTION - FLASK BACKEND
 # ============================================================
 
 from flask import Flask, render_template, request
