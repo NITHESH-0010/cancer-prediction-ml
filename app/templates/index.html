@@ -13,7 +13,7 @@
           href="{{ url_for('static', filename='style.css') }}">
 
     <!-- GOOGLE FONTS -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet">
 
 </head>
@@ -122,7 +122,7 @@
 
                 <div class="stat-card">
 
-                    <h2>95%</h2>
+                    <h2>{{ (metrics.cv_accuracy * 100)|round(1) }}%</h2>
 
                     <p>Prediction Accuracy</p>
 
@@ -130,7 +130,7 @@
 
                 <div class="stat-card">
 
-                    <h2>8</h2>
+                    <h2>7</h2>
 
                     <p>Health Parameters</p>
 
@@ -199,23 +199,60 @@
 
         <!-- RESULT -->
 
-        {% if prediction_text %}
+        
+        {% if result %}
+        <div class="result-container {{ result.risk_band|lower }}-risk js-reveal-override" style="display: block; opacity: 1; transform: none;">
+            <h2>Estimated risk: {{ "%.1f"|format(result.risk_pct) }}%</h2>
+            <p>Risk Band: <strong>{{ result.risk_band }}</strong></p>
+            <p>BMI Status: {{ result.bmi_status }}</p>
 
-        <div class="result-container {{ result_class }}">
+            <div style="margin-top: 20px;">
+                <h3>Factor Contributions</h3>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                {% for factor in result.factors %}
+                    <div style="display: flex; align-items: center; width: 100%;">
+                        <div style="width: 150px; text-align: left; font-size: 0.9em;">{{ factor.name }}</div>
+                        <div style="flex-grow: 1; height: 20px; background: #2d3748; border-radius: 4px; position: relative;">
+                            {% if factor.effect > 0 %}
+                                <div style="position: absolute; left: 50%; height: 100%; width: {{ (factor.effect * 2)|abs }}%; max-width: 50%; background: #e53e3e; border-radius: 0 4px 4px 0;"></div>
+                            {% else %}
+                                <div style="position: absolute; right: 50%; height: 100%; width: {{ (factor.effect * 2)|abs }}%; max-width: 50%; background: #38a169; border-radius: 4px 0 0 4px;"></div>
+                            {% endif %}
+                        </div>
+                        <div style="width: 60px; text-align: right; font-size: 0.9em;">
+                            {{ "+%.1f"|format(factor.effect) if factor.effect > 0 else "%.1f"|format(factor.effect) }}%
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
 
-            <h2>{{ prediction_text }}</h2>
+            {% if result.tips %}
+            <div style="margin-top: 20px; text-align: left;">
+                <h3>Top Risk-Raising Factors & Prevention</h3>
+                <ul style="list-style-type: disc; margin-left: 20px; margin-top: 10px;">
+                {% for tip in result.tips %}
+                    <li><strong>{{ tip.name }}</strong>: {{ tip.cause }} <em>{{ tip.tip }}</em></li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
 
-            <p>{{ probability_text }}</p>
-
-            <span>{{ recommendation }}</span>
-
+            <div style="margin-top: 20px; font-size: 0.8em; color: #a0aec0; text-align: center;">
+                Disclaimer: Educational estimate from a probably synthetic dataset, not medical advice.
+            </div>
         </div>
-
+        {% elif error %}
+        <div class="result-container error-risk">
+            <h2>Error Processing Prediction</h2>
+            <p>{{ error }}</p>
+        </div>
         {% endif %}
+
 
         <!-- FORM -->
 
-        <form action="/predict"
+        <form action="/predict#predictor"
               method="POST"
               class="prediction-form">
 
@@ -225,11 +262,11 @@
 
                 <div class="input-box">
 
-                    <label>Age</label>
+                    <label for="Age">Age</label>
 
                     <input type="number"
-                           name="Age"
-                           placeholder="18 - 100"
+                           name="Age" id="Age" value="{{ result.age if result else '' }}"
+                           placeholder="e.g. 45"
                            min="1"
                            max="120"
                            required>
@@ -238,36 +275,18 @@
 
                 </div>
 
-                <!-- GENDER -->
-
-                <div class="input-box">
-
-                    <label>Gender</label>
-
-                    <select name="Gender" required>
-
-                        <option value="">Select Gender</option>
-
-                        <option value="1">Male</option>
-
-                        <option value="0">Female</option>
-
-                    </select>
-
-                    <small>Select biological gender</small>
-
-                </div>
+                
 
                 <!-- BMI -->
 
                 <div class="input-box">
 
-                    <label>BMI</label>
+                    <label for="BMI">BMI</label>
 
                     <input type="number"
-                           name="BMI"
+                           name="BMI" id="BMI" value="{{ result.bmi if result else '' }}"
                            step="0.1"
-                           placeholder="18.5 - 24.9"
+                           placeholder="e.g. 24.5"
                            min="10"
                            max="70"
                            required>
@@ -280,9 +299,9 @@
 
                 <div class="input-box">
 
-                    <label>Smoking Status</label>
+                    <label for="Smoking">Smoking Status</label>
 
-                    <select name="Smoking" required>
+                    <select name="Smoking" id="Smoking" required>
 
                         <option value="">Select</option>
 
@@ -302,7 +321,7 @@
 
                     <label>Genetic Risk</label>
 
-                    <select name="GeneticRisk" required>
+                    <select name="GeneticRisk" id="GeneticRisk" required>
 
                         <option value="">Select</option>
 
@@ -325,7 +344,7 @@
                     <label>Physical Activity</label>
 
                     <input type="number"
-                           name="PhysicalActivity"
+                           name="PhysicalActivity" id="PhysicalActivity" value="{{ result.physicalactivity if result else '' }}"
                            step="0.5"
                            min="0"
                            max="40"
@@ -343,7 +362,7 @@
                     <label>Alcohol Intake</label>
 
                     <input type="number"
-                           name="AlcoholIntake"
+                           name="AlcoholIntake" id="AlcoholIntake" value="{{ result.alcoholintake if result else '' }}"
                            step="0.5"
                            min="0"
                            max="50"
@@ -360,7 +379,7 @@
 
                     <label>Cancer History</label>
 
-                    <select name="CancerHistory" required>
+                    <select name="CancerHistory" id="CancerHistory" required>
 
                         <option value="">Select</option>
 
@@ -375,6 +394,8 @@
                 </div>
 
             </div>
+
+            <p style="font-size: 0.9em; color: #a0aec0; margin-top: 10px;">Note: Gender was excluded because it was found to be a non-causal dataset artifact.</p>
 
             <!-- BUTTON -->
 

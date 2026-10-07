@@ -21,6 +21,7 @@ body{
 ========================================================= */
 
 .background-wrapper{
+    background-color: #0f172a;
     position:fixed;
     inset:0;
     z-index:-10;
@@ -297,6 +298,7 @@ body{
 
 .prediction-section,
 .info-section{
+    scroll-margin-top: 100px;
     padding:120px 80px;
 }
 
@@ -676,7 +678,7 @@ body{
    ANIMATIONS
 ========================================================= */
 
-.hidden-element{
+html.js .hidden-element{
     opacity:0;
     transform:translateY(40px);
     transition:all 1s ease;
@@ -732,4 +734,21 @@ body{
     pointer-events:none;
     transform:translate(-50%,-50%);
     z-index:-1;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@keyframes heroFloat {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+.glass-card {
+    animation: heroFloat 3s ease-in-out infinite;
 }
