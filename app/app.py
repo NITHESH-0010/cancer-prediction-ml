@@ -64,11 +64,6 @@ def predict():
                 return f"Invalid value (NaN/Inf) for {feat}", 400
             inputs.append(val)
         
-        gender_val = request.form.get('Gender', '')
-        if gender_val == '1': gender_str = 'Male'
-        elif gender_val == '0': gender_str = 'Female'
-        else: gender_str = 'Prefer not to say'
-        
         age, bmi, smoking, genetic_risk, physical_activity, alcohol_intake, cancer_history = inputs
         
         if not (1 <= age <= 120): return "Age must be between 1 and 120", 400
@@ -130,7 +125,6 @@ def predict():
             "factors": factors,
             "tips": tips,
             "bmi_status": bmi_status,
-            "gender_str": gender_str,
             "age": age, "bmi": bmi, "smoking": smoking,
             "genetic_risk": genetic_risk, "physical_activity": physical_activity,
             "alcohol_intake": alcohol_intake, "cancer_history": cancer_history
