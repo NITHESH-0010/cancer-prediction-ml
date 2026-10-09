@@ -1,9 +1,9 @@
 flask
 numpy
 pandas
-scikit-learn==1.8.0
+scikit-learn
 matplotlib
 seaborn
-joblib==1.5.1
+joblib
 xgboost
 gunicorn
